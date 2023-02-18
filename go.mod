@@ -1,3 +1,3 @@
-module github.com/crosine/ganymede
+module github.com/CrosineEnterprises/ganymede
 
 go 1.19
