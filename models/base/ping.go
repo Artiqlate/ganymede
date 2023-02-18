@@ -37,15 +37,6 @@ func ConvertFromInterface(args interface{}) (*Ping, error) {
 	return ping, nil
 }
 
-// TODO: Chances are this will be integrated into server.
-// func ProcessPing(args interface{}) {
-// 	pingVal, convertErr := ConvertFromInterface(args)
-// 	if convertErr != nil {
-// 		log.Fatal(convertErr)
-// 	}
-// 	fmt.Println(pingVal.String())
-// }
-
 func (p *Ping) String() string {
 	return fmt.Sprintf("PING <ARCH: %s, OS: %s>", p.Architecture, p.OS)
 }
