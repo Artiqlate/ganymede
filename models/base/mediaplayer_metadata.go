@@ -38,37 +38,33 @@ func NewMediaPlayerMetadata(title string, artist string) *MediaPlayerMetadata {
 // }
 
 func MediaPlayerFromMpris(metadata map[string]dbus.Variant) *MediaPlayerMetadata {
-	// var trackId string
-	// var length int64
-	// var title string
-	// var artist []string
-	// We have to do this individually because of Go's constraints
-	// trackid
-	// metaErr := StoreMetadataValue(metadata, TRACKID, &trackId)
-	// metaErr := metadata[TRACKID].Store(trackId)
-	// if metaErr != nil {
-	// 	fmt.Println(metaErr)
-	// 	metaErr = nil
-	// }
-	// metaErr = StoreMetadataValue(metadata, LENGTH, &length)
-	// if metaErr != nil {
-	// 	fmt.Println(metaErr)
-	// 	metaErr = nil
-	// }
-	// metaErr = StoreMetadataValue(metadata, TITLE, &title)
-	// if metaErr != nil {
-	// 	fmt.Println(metaErr)
-	// 	metaErr = nil
-	// }
-	// metaErr = StoreMetadataValue(metadata, ARTIST, &artist)
-	// if metaErr != nil {
-	// 	fmt.Println(metaErr)
-	// }
+	var trackId string
+	var length int64
+	var title string
+	var artist []string
+	var ok bool
+
+	trackId, ok = metadata[TRACKID].Value().(string)
+	if !ok {
+		trackId = ""
+	}
+	length, ok = metadata[LENGTH].Value().(int64)
+	if !ok {
+		length = -1
+	}
+	title, ok = metadata[TITLE].Value().(string)
+	if !ok {
+		title = ""
+	}
+	artist, ok = metadata[ARTIST].Value().([]string)
+	if !ok {
+		artist = []string{}
+	}
 
 	return &MediaPlayerMetadata{
-		TrackId: metadata[TRACKID].Value().(string),
-		Length:  metadata[LENGTH].Value().(int64),
-		Title:   metadata[TITLE].Value().(string),
-		Artist:  metadata[ARTIST].Value().([]string),
+		TrackId: trackId,
+		Length:  length,
+		Title:   title,
+		Artist:  artist,
 	}
 }
