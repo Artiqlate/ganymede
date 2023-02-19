@@ -28,12 +28,12 @@ func NewPingFromArgs(arch string, os string) *Ping {
 }
 
 func DecodePing(decoder *msgpack.Decoder) (*Ping, error) {
-	var ping *Ping
-	convertErr := decoder.Decode(ping)
+	var ping Ping
+	convertErr := decoder.Decode(&ping)
 	if convertErr != nil {
 		return nil, convertErr
 	}
-	return ping, nil
+	return &ping, nil
 }
 
 func (p *Ping) String() string {
