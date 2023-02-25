@@ -15,17 +15,17 @@ type Ping struct {
 	Capabilities []string `msgpack:"capabilities"`
 }
 
-const METHOD_NAME = "ping"
+const METHOD_NAME = "init"
 
 func NewPing() *Ping {
-	return NewPingFromArgs(runtime.GOARCH, runtime.GOOS)
+	return NewPingFromArgs(system.CheckCapabilities())
 }
 
-func NewPingFromArgs(arch string, os string) *Ping {
+func NewPingFromArgs(capabilities []string) *Ping {
 	return &Ping{
-		Architecture: arch,
-		OS:           os,
-		Capabilities: system.CheckCapabilities(),
+		Architecture: runtime.GOARCH,
+		OS:           runtime.GOOS,
+		Capabilities: capabilities,
 	}
 }
 
@@ -40,20 +40,4 @@ func DecodePing(decoder *msgpack.Decoder) (*Ping, error) {
 
 func (p *Ping) String() string {
 	return fmt.Sprintf("PING <ARCH: %s, OS: %s>", p.Architecture, p.OS)
-}
-
-// -- TODO: REMOVE THIS SOON
-func ConvertFromInterface(args interface{}) (*Ping, error) {
-	var ping *Ping
-	// We're now focusing on array-based MessagePack only (CASE 2). Remove it if
-	//  we're sticking with array-based serialization.
-	switch convertVal := args.(type) {
-	case map[string]interface{}:
-		ping = NewPingFromArgs(convertVal["os"].(string), convertVal["arch"].(string))
-	case []interface{}:
-		ping = NewPingFromArgs(convertVal[0].(string), convertVal[1].(string))
-	default:
-		return nil, fmt.Errorf("cannot convert using interface")
-	}
-	return ping, nil
 }
