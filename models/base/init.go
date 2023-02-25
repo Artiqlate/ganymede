@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"runtime"
 
+	"github.com/CrosineEnterprises/ganymede/models"
 	"github.com/CrosineEnterprises/ganymede/system"
 	"github.com/vmihailenco/msgpack/v5"
 )
@@ -40,4 +41,11 @@ func DecodeInit(decoder *msgpack.Decoder) (*Init, error) {
 
 func (p *Init) String() string {
 	return fmt.Sprintf("INIT <ARCH: %s, OS: %s>", p.Architecture, p.OS)
+}
+
+func (i *Init) GenMessage(method string) *models.Message {
+	return &models.Message{
+		Method: method,
+		Args:   i,
+	}
 }
