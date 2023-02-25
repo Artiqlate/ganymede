@@ -8,7 +8,7 @@ import (
 	"github.com/vmihailenco/msgpack/v5"
 )
 
-type Ping struct {
+type Init struct {
 	_msgpack     struct{} `msgpack:",as_array"`
 	Architecture string   `msgpack:"arch"`
 	OS           string   `msgpack:"os"`
@@ -17,20 +17,20 @@ type Ping struct {
 
 const METHOD_NAME = "init"
 
-func NewPing() *Ping {
-	return NewPingFromArgs(system.CheckCapabilities())
+func NewInit() *Init {
+	return NewInitFromArgs(system.CheckCapabilities())
 }
 
-func NewPingFromArgs(capabilities []string) *Ping {
-	return &Ping{
+func NewInitFromArgs(capabilities []string) *Init {
+	return &Init{
 		Architecture: runtime.GOARCH,
 		OS:           runtime.GOOS,
 		Capabilities: capabilities,
 	}
 }
 
-func DecodePing(decoder *msgpack.Decoder) (*Ping, error) {
-	var ping Ping
+func DecodeInit(decoder *msgpack.Decoder) (*Init, error) {
+	var ping Init
 	convertErr := decoder.Decode(&ping)
 	if convertErr != nil {
 		return nil, convertErr
@@ -38,6 +38,6 @@ func DecodePing(decoder *msgpack.Decoder) (*Ping, error) {
 	return &ping, nil
 }
 
-func (p *Ping) String() string {
-	return fmt.Sprintf("PING <ARCH: %s, OS: %s>", p.Architecture, p.OS)
+func (p *Init) String() string {
+	return fmt.Sprintf("INIT <ARCH: %s, OS: %s>", p.Architecture, p.OS)
 }

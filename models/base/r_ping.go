@@ -1,13 +1,13 @@
 package base
 
 type RPing struct {
-	Ping
+	Init
 	EnabledCapabilities []string
 }
 
 func NewRPing(enabledCapabilities []string) *RPing {
 	return &RPing{
-		*NewPing(),
+		*NewInit(),
 		enabledCapabilities,
 	}
 }
