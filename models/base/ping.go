@@ -15,6 +15,8 @@ type Ping struct {
 	Capabilities []string `msgpack:"capabilities"`
 }
 
+const METHOD_NAME = "ping"
+
 func NewPing() *Ping {
 	return NewPingFromArgs(runtime.GOARCH, runtime.GOOS)
 }
