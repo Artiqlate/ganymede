@@ -3,7 +3,7 @@ Media Player Metadata
 REFERENCE: https://www.freedesktop.org/wiki/Specifications/mpris-spec/metadata/
 */
 
-package base
+package mp
 
 //lint:file-ignore U1000 `msgpack` options, not for serialization.
 
