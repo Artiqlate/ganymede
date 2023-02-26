@@ -1,5 +1,7 @@
 package base
 
+//lint:file-ignore U1000 `msgpack` options, not for serialization.
+
 import (
 	"fmt"
 	"runtime"
@@ -19,10 +21,10 @@ type Init struct {
 const METHOD_NAME = "init"
 
 func NewInit() *Init {
-	return NewInitFromArgs(system.CheckCapabilities())
+	return NewInitWithCapabilities(system.CheckCapabilities())
 }
 
-func NewInitFromArgs(capabilities []string) *Init {
+func NewInitWithCapabilities(capabilities []string) *Init {
 	return &Init{
 		Architecture: runtime.GOARCH,
 		OS:           runtime.GOOS,

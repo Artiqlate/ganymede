@@ -2,7 +2,10 @@
 Media Player Metadata
 REFERENCE: https://www.freedesktop.org/wiki/Specifications/mpris-spec/metadata/
 */
+
 package base
+
+//lint:file-ignore U1000 `msgpack` options, not for serialization.
 
 import (
 	"github.com/godbus/dbus/v5"
