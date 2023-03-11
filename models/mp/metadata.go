@@ -20,7 +20,7 @@ const (
 	// ALBUM_ARTIST = "xesam:albumArtist"
 )
 
-type MediaPlayerMetadata struct {
+type Metadata struct {
 	_msgpack struct{} `msgpack:",as_array"`
 	TrackId  string   `msgpack:"trackid"`
 	Length   int64    `msgpack:"length"`
@@ -28,19 +28,7 @@ type MediaPlayerMetadata struct {
 	Artist   []string `msgpack:"artist"`
 }
 
-func NewMediaPlayerMetadata(title string, artist string) *MediaPlayerMetadata {
-	return &MediaPlayerMetadata{}
-}
-
-// func StoreMetadataValue(metadata map[string]dbus.Variant, key string, value interface{}) error {
-// 	metadataParseErr := metadata[key].Store(value)
-// 	if metadataParseErr != nil {
-// 		return metadataParseErr
-// 	}
-// 	return nil
-// }
-
-func MediaPlayerFromMpris(metadata map[string]dbus.Variant) *MediaPlayerMetadata {
+func MetadataFromMPRIS(metadata map[string]dbus.Variant) *Metadata {
 	var trackId string
 	var length int64
 	var title string
@@ -64,7 +52,7 @@ func MediaPlayerFromMpris(metadata map[string]dbus.Variant) *MediaPlayerMetadata
 		artist = []string{}
 	}
 
-	return &MediaPlayerMetadata{
+	return &Metadata{
 		TrackId: trackId,
 		Length:  length,
 		Title:   title,
