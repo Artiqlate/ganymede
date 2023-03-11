@@ -12,39 +12,37 @@ import (
 )
 
 const (
-	TRACKID = "xesam:trackid"
-	LENGTH  = "xesam:trackid"
-	TITLE   = "xesam:title"
-	ARTIST  = "xesam:artist"
-	// ALBUM   = "xesam:album"
-	// ALBUM_ARTIST = "xesam:albumArtist"
+	TRACKID      = "xesam:trackid"
+	LENGTH       = "xesam:length"
+	TITLE        = "xesam:title"
+	ARTIST       = "xesam:artist"
+	ALBUM        = "xesam:album"
+	ALBUM_ARTIST = "xesam:albumArtist"
+	URL          = `xesam:url`
+	ART_URL      = "mpris:artUrl"
 )
 
-type MediaPlayerMetadata struct {
-	_msgpack struct{} `msgpack:",as_array"`
-	TrackId  string   `msgpack:"trackid"`
-	Length   int64    `msgpack:"length"`
-	Title    string   `msgpack:"title"`
-	Artist   []string `msgpack:"artist"`
+type Metadata struct {
+	_msgpack    struct{} `msgpack:",as_array"`
+	TrackId     string   `msgpack:"trackid"`
+	Length      int64    `msgpack:"length"`
+	Title       string   `msgpack:"title"`
+	Artist      []string `msgpack:"artist"`
+	Album       string   `msgpack:"album"`
+	AlbumArtist []string `msgpack:"albumArtist"`
+	Url         string   `msgpack:"url"`
+	ArtUrl      string   `msgpack:"artUrl"`
 }
 
-func NewMediaPlayerMetadata(title string, artist string) *MediaPlayerMetadata {
-	return &MediaPlayerMetadata{}
-}
-
-// func StoreMetadataValue(metadata map[string]dbus.Variant, key string, value interface{}) error {
-// 	metadataParseErr := metadata[key].Store(value)
-// 	if metadataParseErr != nil {
-// 		return metadataParseErr
-// 	}
-// 	return nil
-// }
-
-func MediaPlayerFromMpris(metadata map[string]dbus.Variant) *MediaPlayerMetadata {
+func MetadataFromMPRIS(metadata map[string]dbus.Variant) *Metadata {
 	var trackId string
 	var length int64
 	var title string
 	var artist []string
+	var album string
+	var albumArtist []string
+	var url string
+	var artUrl string
 	var ok bool
 
 	trackId, ok = metadata[TRACKID].Value().(string)
@@ -63,11 +61,31 @@ func MediaPlayerFromMpris(metadata map[string]dbus.Variant) *MediaPlayerMetadata
 	if !ok {
 		artist = []string{}
 	}
+	album, ok = metadata[ALBUM].Value().(string)
+	if !ok {
+		album = ""
+	}
+	albumArtist, ok = metadata[ALBUM_ARTIST].Value().([]string)
+	if !ok {
+		albumArtist = []string{}
+	}
+	url, ok = metadata[URL].Value().(string)
+	if !ok {
+		url = ""
+	}
+	artUrl, ok = metadata[ART_URL].Value().(string)
+	if !ok {
+		artUrl = ""
+	}
 
-	return &MediaPlayerMetadata{
-		TrackId: trackId,
-		Length:  length,
-		Title:   title,
-		Artist:  artist,
+	return &Metadata{
+		TrackId:     trackId,
+		Length:      length,
+		Title:       title,
+		Artist:      artist,
+		Album:       album,
+		AlbumArtist: albumArtist,
+		Url:         url,
+		ArtUrl:      artUrl,
 	}
 }
