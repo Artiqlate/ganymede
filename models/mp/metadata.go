@@ -18,9 +18,8 @@ import (
 )
 
 const (
-	TRACKID = "mpris:trackid"
-	LENGTH  = "mpris:length"
-	// LENGTH_SPOTIFY = "mpris:length:@t"
+	TRACKID      = "mpris:trackid"
+	LENGTH       = "mpris:length"
 	TITLE        = "xesam:title"
 	ARTIST       = "xesam:artist"
 	ALBUM        = "xesam:album"
@@ -61,12 +60,6 @@ func MetadataFromMPRIS(metadata map[string]dbus.Variant) *Metadata {
 	if !ok {
 		length = 0
 	}
-	// LENGTH: Spotify Special Case
-	// if length == -1 {
-	// 	if length, ok = metadata[LENGTH_SPOTIFY].Value().(int64); !ok {
-	// 		length = -1
-	// 	}
-	// }
 	title, ok = metadata[TITLE].Value().(string)
 	if !ok {
 		title = ""
