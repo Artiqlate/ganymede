@@ -32,7 +32,7 @@ const (
 type Metadata struct {
 	_msgpack    struct{} `msgpack:",as_array"`
 	TrackId     string   `msgpack:"trackid"`
-	Length      int64    `msgpack:"length"`
+	Length      uint64   `msgpack:"length"`
 	Title       string   `msgpack:"title"`
 	Artist      []string `msgpack:"artist"`
 	Album       string   `msgpack:"album"`
@@ -43,7 +43,7 @@ type Metadata struct {
 
 func MetadataFromMPRIS(metadata map[string]dbus.Variant) *Metadata {
 	var trackId string
-	var length int64
+	var length uint64
 	var title string
 	var artist []string
 	var album string
@@ -57,9 +57,9 @@ func MetadataFromMPRIS(metadata map[string]dbus.Variant) *Metadata {
 	if !ok {
 		trackId = ""
 	}
-	length, ok = metadata[LENGTH].Value().(int64)
+	length, ok = metadata[LENGTH].Value().(uint64)
 	if !ok {
-		length = -1
+		length = 0
 	}
 	// LENGTH: Spotify Special Case
 	// if length == -1 {
