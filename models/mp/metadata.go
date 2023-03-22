@@ -1,8 +1,14 @@
 /*
 Media Player Metadata
-REFERENCE: https://www.freedesktop.org/wiki/Specifications/mpris-spec/metadata/
-*/
 
+REFERENCE: https://www.freedesktop.org/wiki/Specifications/mpris-spec/metadata/
+
+NOTE: This is currently linux-only.
+
+TODO: Add Windows/macOS Implementations also.
+
+Copyright (C) 2023 Goutham Krishna K V
+*/
 package mp
 
 //lint:file-ignore U1000 `msgpack` options, not for serialization.
@@ -12,14 +18,15 @@ import (
 )
 
 const (
-	TRACKID      = "xesam:trackid"
-	LENGTH       = "xesam:length"
-	TITLE        = "xesam:title"
-	ARTIST       = "xesam:artist"
-	ALBUM        = "xesam:album"
-	ALBUM_ARTIST = "xesam:albumArtist"
-	URL          = `xesam:url`
-	ART_URL      = "mpris:artUrl"
+	TRACKID        = "xesam:trackid"
+	LENGTH         = "xesam:length"
+	LENGTH_SPOTIFY = "xesam:length:@t"
+	TITLE          = "xesam:title"
+	ARTIST         = "xesam:artist"
+	ALBUM          = "xesam:album"
+	ALBUM_ARTIST   = "xesam:albumArtist"
+	URL            = `xesam:url`
+	ART_URL        = "mpris:artUrl"
 )
 
 type Metadata struct {
@@ -45,6 +52,7 @@ func MetadataFromMPRIS(metadata map[string]dbus.Variant) *Metadata {
 	var artUrl string
 	var ok bool
 
+	// -- PARSE THE VALUES
 	trackId, ok = metadata[TRACKID].Value().(string)
 	if !ok {
 		trackId = ""
@@ -52,6 +60,12 @@ func MetadataFromMPRIS(metadata map[string]dbus.Variant) *Metadata {
 	length, ok = metadata[LENGTH].Value().(int64)
 	if !ok {
 		length = -1
+	}
+	// LENGTH: Spotify Special Case
+	if length == -1 {
+		if length, ok = metadata[LENGTH_SPOTIFY].Value().(int64); !ok {
+			length = -1
+		}
 	}
 	title, ok = metadata[TITLE].Value().(string)
 	if !ok {
