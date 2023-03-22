@@ -18,17 +18,21 @@ import (
 )
 
 const (
-	TRACKID      = "mpris:trackid"
-	LENGTH       = "mpris:length"
+	// MPRIS specific
+	TRACKID = "mpris:trackid"
+	LENGTH  = "mpris:length"
+	ART_URL = "mpris:artUrl"
+	// Xesam specific
 	TITLE        = "xesam:title"
 	ARTIST       = "xesam:artist"
 	ALBUM        = "xesam:album"
 	ALBUM_ARTIST = "xesam:albumArtist"
 	URL          = `xesam:url`
-	ART_URL      = "xesam:artUrl"
+	// TODO: Add other metadata fields also
 )
 
 type Metadata struct {
+	// Common Metadata Fields
 	_msgpack    struct{} `msgpack:",as_array"`
 	TrackId     string   `msgpack:"trackid"`
 	Length      uint64   `msgpack:"length"`
@@ -38,6 +42,7 @@ type Metadata struct {
 	AlbumArtist []string `msgpack:"albumArtist"`
 	Url         string   `msgpack:"url"`
 	ArtUrl      string   `msgpack:"artUrl"`
+	// TODO: Add other metadata fields also
 }
 
 func MetadataFromMPRIS(metadata map[string]dbus.Variant) *Metadata {
