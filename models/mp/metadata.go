@@ -20,13 +20,13 @@ import (
 const (
 	TRACKID        = "xesam:trackid"
 	LENGTH         = "xesam:length"
-	LENGTH_SPOTIFY = "xesam:length:@t"
+	LENGTH_SPOTIFY = "mpris:length:@t"
 	TITLE          = "xesam:title"
 	ARTIST         = "xesam:artist"
 	ALBUM          = "xesam:album"
 	ALBUM_ARTIST   = "xesam:albumArtist"
 	URL            = `xesam:url`
-	ART_URL        = "mpris:artUrl"
+	ART_URL        = "xesam:artUrl"
 )
 
 type Metadata struct {
