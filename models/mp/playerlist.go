@@ -1,4 +1,4 @@
-//lint:file-ignore U1000 `msgpack` options, not for serialization.
+//lint:file-ignore U1000 `msgpack` options, not for serialization.w
 package mp
 
 type MPlayerList struct {
