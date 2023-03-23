@@ -1,5 +1,7 @@
 package mp
 
+type PlaybackStatus string
+
 const (
 	// -- PLAYBACK STATUS --
 	// Support

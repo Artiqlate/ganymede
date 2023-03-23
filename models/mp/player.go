@@ -24,11 +24,11 @@ type PlayerData struct {
 	MaximumRate    float64   `msgpack:"maximumRate"`    // RO
 	// Capabilities
 	// Enable 'next', 'previous', 'play', 'pause', 'seek' capabilities with these.
-	CanGoNext     bool `msgpack:"canGoNext"`     // RO
-	CanGoPrevious bool `msgpack:"canGoPrevious"` // RO
-	CanPlay       bool `msgpack:"canPlay"`       // RO
-	CanPause      bool `msgpack:"canPause"`      // RO
-	CanSeek       bool `msgpack:"canSeek"`       // RO
+	// CanGoNext     bool `msgpack:"canGoNext"`     // RO
+	// CanGoPrevious bool `msgpack:"canGoPrevious"` // RO
+	// CanPlay       bool `msgpack:"canPlay"`       // RO
+	// CanPause      bool `msgpack:"canPause"`      // RO
+	// CanSeek       bool `msgpack:"canSeek"`       // RO
 	// This will assume all properties are read-only (frozen)
-	CanControl bool `msgpack:"canControl"` // RO
+	// CanControl bool `msgpack:"canControl"` // RO
 }
