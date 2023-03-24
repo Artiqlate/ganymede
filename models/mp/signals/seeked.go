@@ -1,4 +1,4 @@
-package mp
+package mp_signals
 
 type Seeked struct {
 	//lint:ignore U1000 `msgpack` options, not for serialization.
