@@ -1,0 +1,9 @@
+package mp
+
+type Seeked struct {
+	_msgpack   struct{} `msgpack:",as_array"`
+	PlayerName string   `msgpack:"playerName"`
+	PlayerIdx  int      `msgpack:"playerIdx"`
+	// "seeked" time in microseconds (us).
+	SeekedInUs int64 `msgpack:"seekedInUs"`
+}
