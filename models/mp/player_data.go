@@ -1,3 +1,4 @@
+//lint:file-ignore U1000 `msgpack` options, not for serialization.
 package mp
 
 type PlayerData struct {
