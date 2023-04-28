@@ -1,7 +1,5 @@
 package base
 
-//lint:file-ignore U1000 `msgpack` options, not for serialization.
-
 import (
 	"fmt"
 	"runtime"
@@ -11,7 +9,9 @@ import (
 	"github.com/vmihailenco/msgpack/v5"
 )
 
+// TODO: Remove field names (we use array-style msgpack)
 type Init struct {
+	//lint:ignore U1000 `msgpack` options, not for serialization.
 	_msgpack     struct{} `msgpack:",as_array"`
 	Architecture string   `msgpack:"arch"`
 	OS           string   `msgpack:"os"`

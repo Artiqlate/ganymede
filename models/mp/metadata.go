@@ -11,8 +11,6 @@ Copyright (C) 2023 Goutham Krishna K V
 */
 package mp
 
-//lint:file-ignore U1000 `msgpack` options, not for serialization.
-
 import (
 	"github.com/godbus/dbus/v5"
 )
@@ -31,8 +29,10 @@ const (
 	// TODO: Add other metadata fields also
 )
 
+// TODO: Remove field names (we use array-style msgpack)
 type Metadata struct {
 	// Common Metadata Fields
+	//lint:ignore U1000 `msgpack` options, not for serialization.
 	_msgpack    struct{} `msgpack:",as_array"`
 	TrackId     string   `msgpack:"trackid"`
 	Length      uint64   `msgpack:"length"`

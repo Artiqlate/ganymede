@@ -10,6 +10,7 @@ Copyright (C) 2023 Goutham Krishna K V
 
 //lint:ignore U1000 `msgpack` options, not for serialization.
 
+// TODO: Remove field names (we use array-style msgpack)
 type FullMetadata struct {
 	//lint:ignore U1000 `msgpack` options, not for serialization.
 	_msgpack       struct{}  `msgpack:",as_array"`
