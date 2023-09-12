@@ -1,6 +1,6 @@
 package mp_signals
 
-import "github.com/CrosineEnterprises/ganymede/models/mp"
+import "github.com/Artiqlate/ganymede/models/mp"
 
 // TODO: Remove field names (we use array-style msgpack)
 type PlayerCreated struct {

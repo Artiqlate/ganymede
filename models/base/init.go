@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/CrosineEnterprises/ganymede/models"
-	"github.com/CrosineEnterprises/ganymede/system"
+	"github.com/Artiqlate/ganymede/models"
+	"github.com/Artiqlate/ganymede/system"
 	"github.com/vmihailenco/msgpack/v5"
 )
 

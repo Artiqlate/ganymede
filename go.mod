@@ -1,4 +1,4 @@
-module github.com/CrosineEnterprises/ganymede
+module github.com/Artiqlate/ganymede
 
 go 1.19
 
